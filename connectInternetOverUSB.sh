@@ -2,8 +2,6 @@
 
 __BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET()
 {
-	echo "Checking for internet connection"
-
 	PING_RESULTS=$( ping -c 1 8.8.8.8 2>&1 );
 	if [ "$PING_RESULTS" = "connect: Network is unreachable" ]
 	then
@@ -11,7 +9,8 @@ __BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET()
 	        then
 	                echo "ping failed, setting up internet connection"
 	                route add default gw 192.168.7.1
-	                $0 "attempt 2"
+			CMD="__BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET attempt2"
+			eval "$CMD"
 	        else
 	                echo "could not connect to network"
 	        fi
@@ -32,6 +31,7 @@ if [ $SUCCESS -eq 0 ]
 then
 	if [[ $ANSWER == "y" ]]
 	then
+		echo "Checking for internet connection"
 		__BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET
 	fi
 else
