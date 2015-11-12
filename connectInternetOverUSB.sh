@@ -25,11 +25,15 @@ __BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET()
 	fi
 }
 
-echo "Check for internet connection (y/n)? "
-read -n 1 ANSWER
-if [[ $ANSWER == "y" ]]
+read -n 1 -t 3 -p "Check for internet connection (y/n)? " ANSWER
+SUCCESS=$?
+echo ""
+if [ $SUCCESS -eq 0 ]
 then
-	__BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET
+	if [[ $ANSWER == "y" ]]
+	then
+		__BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET
+	fi
 else
-	echo ""
+	echo "timed out after 3 seconds"
 fi
