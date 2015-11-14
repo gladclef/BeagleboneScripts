@@ -3,7 +3,7 @@
 __BEAGLEBONE_SCRIPTS_CONNECT_TO_INTERNET()
 {
 	PING_RESULTS=$( ping -c 1 8.8.8.8 2>&1 );
-	if [ "$PING_RESULTS" = "connect: Network is unreachable" ]
+	if [ "$?" -ne 0 ]
 	then
 	        if [ "$#" -ne 1 ]
 	        then
