@@ -9,7 +9,7 @@ then
 fi
 
 # initializes environment variables PINS and SLOTS
-initEnviroVars.sh
+source initEnviroVars.sh
 
 # connects the BBB to the internet
-connectInternetOverUSB.sh
+source connectInternetOverUSB.sh
